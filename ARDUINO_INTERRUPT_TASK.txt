@@ -1,0 +1,39 @@
+// C++ code
+//
+int red_led = 12;
+int blue_led = 11;
+int button = 2;
+volatile int button_reading; //variable keeps changing
+
+
+
+
+void setup()
+{
+  pinMode(red_led, OUTPUT);
+  pinMode(blue_led, OUTPUT);
+  pinMode(button, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(2),buttonInterrupt,CHANGE); // can also directly give 0 vector
+  
+
+
+}
+
+void loop()
+{
+  digitalWrite(red_led, HIGH); 
+  delay(1000); 
+  digitalWrite(red_led, LOW);
+  delay(1000); 
+}
+
+void buttonInterrupt()
+{
+  button_reading = digitalRead(button);
+  if (button_reading == LOW) {
+    digitalWrite(blue_led,HIGH);
+  }
+  if (button_reading == HIGH) {
+    digitalWrite(blue_led,LOW);
+  }
+}
